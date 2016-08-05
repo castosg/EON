@@ -1,1 +1,1 @@
-angular.module("app.views", ["ReadView", "EditView"]);
+angular.module("app.views", ["ReadView", "EditView", "HomeView"]);

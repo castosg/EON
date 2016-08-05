@@ -12,7 +12,13 @@ angular.module("EONApp").config(function($routeProvider){
       controllerAs: "ctrl"
     })
 
+    .when("/home", {
+      templateUrl : "views/HomeView/HomeView.html",
+      controller : "ReadViewController",
+      controllerAs: "ctrl"
+    })
+
     .otherwise({
-      redirectTo : "/"
+      redirectTo : "/home"
     });
 });
