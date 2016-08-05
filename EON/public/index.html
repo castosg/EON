@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <title>EON</title>
+
+  <head>
+    <!--External Dependencies -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <scriptsrc="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-route.js"></script>
+
+    <!-- Internal Dependencies -->
+
+
+    <script src="app.js"></script>
+
+    <script src="views/app.views.js"></script>
+
+
+    <script src="views/EditView/EditView.js"></script>
+    <script src="views/EditView/EditViewController.js"></script>
+    <script src="views/EditView/EditViewService.js"></script>
+
+    <script src="views/ReadView/ReadView.js"></script>
+    <script src="views/ReadView/ReadViewController.js"></script>
+    <script src="views/ReadView/ReadViewService.js"></script>
+
+    <script src="routes.js"></script>
+
+
+  </head>
+
+  <body ng-app="EONApp">
+    <h1>This is the home Page</h1>
+    <div>
+      <a href="#/eonEdit">Create Eon</a>
+      <a href="#/eonRead">Load Eon</a>
+    </div>
+
+    <ng-view></ng-view>
+
+  </body>
+
+</html>
