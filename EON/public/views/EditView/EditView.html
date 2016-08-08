@@ -1,3 +1,52 @@
-<div>
+<div ng-init="
+  characters = {
+    'Reaper' : {name : 'Reaper', role : 'dps', counters : 'tanks', counteredBy : 'noone knows'},
+    'Tracer' : {name : 'Tracer', role: 'disruptor', counters : 'backlines', counteredBy : 'winston'},
+    'Genji' : {name : 'Genji', role : 'disruptor', counters : 'my sanity', counteredBy : 'bad players'},
+    'Lucio' : {name : 'Lucio', role : 'support', counters : 'damage', counterdBy : 'autotarget'}
+  };" class="container-fluid">
 <p>Some Sample Content for Edit View</p>
+
+  <div ng-init= " overwatchEditor = {
+    name : '',
+    role : '',
+    counters : '',
+    counteredBy : ''
+  };
+  propName = [];"> <!--This div will hold the editor object used to manipulate the characters object -->
+      <div class= "panel panel-primary">
+        <div class="panel-heading">
+          <p>Edit</p>
+        </div>
+
+        <div class="panel-body">
+          <div>Name: <input ng-model="overwatchEditor.name"></input></div>
+          <div>Role: <input ng-model="overwatchEditor.role"></input></div>
+          <div>Counters: <input ng-model="overwatchEditor.counters"></input></div>
+          <div>Countered By: <input ng-model="overwatchEditor.counteredBy"></input></div>
+        </div>
+
+      </div>
+
+
+    <div> <!-- this div will hold the character cards that get repeated over. -->
+      <div ng-repeat= "character in characters">
+        <div class= "panel panel-primary character-panel">
+          <div class="panel-heading">
+            <div>{{character.name}} <button class="btn btn-primary">Edit {{character.name}}</button></div>
+          </div>
+
+          <div class="panel-body">
+            <div>Name: {{character.name}}</div>
+            <div>Role: {{character.role}}</div>
+            <div>Counters: {{character.counters}}</div>
+            <div>Countered By: {{character.counteredBy}}</div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
 </div>

@@ -1,3 +1,10 @@
-.row {
-  padding : 10px;
+
+
+.character-panel{
+  float : left;
+  width : 250px;
+  margin-right : 10px;
+}
+button.editButton{
+  float : right
 }

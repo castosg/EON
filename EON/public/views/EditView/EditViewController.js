@@ -1,4 +1,3 @@
-angular.module("EditView").controller("EditViewController", function(EditViewService){
-
+angular.module("EditView").controller("EditViewController", function($scope, EditViewService){
 
 });
