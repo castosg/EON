@@ -24,7 +24,7 @@
       <div ng-repeat= "character in ctrl.characters">
         <div class= "panel panel-primary character-panel">
           <div class="panel-heading">
-            <div>{{character.name}} <button ng-click="ctrl.sendAlert('paramOne', 'paramTwo')" class="btn btn-primary">Edit</button></div>
+            <div>{{character.name}} <button ng-click="ctrl.editChar(ctrl.characters.indexOf(character))" class="btn btn-primary">Edit</button></div>
           </div>
 
           <div class="panel-body">
