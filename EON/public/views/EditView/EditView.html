@@ -1,43 +1,56 @@
 <div class="container-fluid">
-<p>Some Sample Content for Edit View</p>
+    <p>Some Sample Content for Edit View</p>
 
-  <div> <!--This div will hold the editor object used to manipulate the characters object -->
-      <div class= "panel panel-primary">
-        <div class="panel-heading">
-          <p>Edit</p>
-        </div>
+    <div>
+        <!--This div will hold the editor object used to manipulate the characters object -->
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <p>Edit</p>
+            </div>
 
-      <form class="form-group" ng-model="editor">
-        <div class="panel-body">
-          <div>Name: <input class="form-control" ng-model="ctrl.editor.name"></input></div>
-          <div>Role: <input class="form-control" ng-model="ctrl.editor.role"></input></div>
-          <div>Counters: <input class="form-control" ng-model="ctrl.editor.counters"></input></div>
-          <div>Countered By: <input class="form-control" ng-model="ctrl.editor.counteredBy"></input></div>
-        </div>
-        <button class="form-control" type="submit" ng-click="ctrl.addChar()">Add</button>
-      </form>
-
-      </div>
-
-
-    <div> <!-- this div will hold the character cards that get repeated over. -->
-      <div ng-repeat= "character in ctrl.characters">
-        <div class= "panel panel-primary character-panel">
-          <div class="panel-heading">
-            <div>{{character.name}} <button ng-click="ctrl.editChar(ctrl.characters.indexOf(character))" class="btn btn-primary">Edit</button></div>
-          </div>
-
-          <div class="panel-body">
-            <div>Name: {{character.name}}</div>
-            <div>Role: {{character.role}}</div>
-            <div>Counters: {{character.counters}}</div>
-            <div>Countered By: {{character.counteredBy}}</div>
-          </div>
+            <form class="form-group" ng-model="editor">
+                <div class="panel-body">
+                    <div>Name:
+                        <input class="form-control" ng-model="ctrl.editor.name"></input>
+                    </div>
+                    <div>Role:
+                        <input class="form-control" ng-model="ctrl.editor.role"></input>
+                    </div>
+                    <div>Counters:
+                        <input class="form-control" ng-model="ctrl.editor.counters"></input>
+                    </div>
+                    <div>Countered By:
+                        <input class="form-control" ng-model="ctrl.editor.counteredBy"></input>
+                    </div>
+                </div>
+                <button class="form-control" type="submit" ng-click="ctrl.addChar()">Add</button>
+            </form>
 
         </div>
 
-      </div>
+
+        <div>
+            <!-- this div will hold the character cards that get repeated over. -->
+            <div ng-repeat="character in ctrl.characters">
+                <div class="panel panel-primary character-panel">
+                    <div class="panel-heading">
+                        <div>{{character.name}}
+                            <button ng-click="ctrl.editChar(ctrl.characters.indexOf(character))" class="btn btn-primary">Edit</button>
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+                        <div>Name: {{character.name}}</div>
+                        <div>Role: {{character.role}}</div>
+                        <div>Counters: {{character.counters}}</div>
+                        <div>Countered By: {{character.counteredBy}}</div>
+                        <div><button ng-click="ctrl.deleteChar(ctrl.characters.indexOf(character))" class="btn btn-danger">Delete</button></div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
     </div>
-
-  </div>
 </div>

@@ -5,7 +5,7 @@ angular.module("EditView").controller("EditViewController", function(EditViewSer
         name: 'Reaper',
         role: 'dps',
         counters: 'tanks',
-        counteredBy: 'noone knows'
+        counteredBy: 'No one knows'
     }, {
         name: 'Tracer',
         role: 'disruptor',
@@ -20,16 +20,19 @@ angular.module("EditView").controller("EditViewController", function(EditViewSer
         name: 'Lucio',
         role: 'support',
         counters: 'damage',
-        counterdBy: 'autotarget'
+        counterdBy: 'Racism'
     }];
     vm.editor = {};
     vm.sendAlert = function(stuff, stuffTwo) {
         alert(stuff + stuffTwo);
 
     }
-    vm.editChar = function(index){
-      //console.log(vm.characters[index]);
-      giveToEditor(vm.characters[index]);
+    vm.editChar = function(index) {
+        giveToEditor(vm.characters[index]);
+        vm.characters.splice(index, 1);
+    }
+
+    vm.deleteChar = function(index){
       vm.characters.splice(index, 1);
     }
 
@@ -43,11 +46,11 @@ angular.module("EditView").controller("EditViewController", function(EditViewSer
         vm.editor = {};
     }
 
-    function giveToEditor (target){
-      vm.editor.name = target.name;
-      vm.editor.role = target.role;
-      vm.editor.counters = target.counters;
-      vm.editor.counteredBy = target.counteredBy;
+    function giveToEditor(target) {
+        vm.editor.name = target.name;
+        vm.editor.role = target.role;
+        vm.editor.counters = target.counters;
+        vm.editor.counteredBy = target.counteredBy;
     }
 
     function charFactory(charName, charRole, charCounters, charCounteredBy) {

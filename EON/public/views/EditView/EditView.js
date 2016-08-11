@@ -1,1 +1,1 @@
-angular.module("EditView",[]);
+angular.module("EditView", []);

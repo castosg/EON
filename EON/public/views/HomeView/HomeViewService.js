@@ -1,4 +1,4 @@
-angular.module("HomeView").factory("HomeViewService", function($http){
-  var methods = {};
-  return methods;
+angular.module("HomeView").factory("HomeViewService", function($http) {
+    var methods = {};
+    return methods;
 });

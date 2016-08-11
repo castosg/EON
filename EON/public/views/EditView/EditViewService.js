@@ -1,6 +1,6 @@
-angular.module("EditView").factory("EditViewService", function($http){
-  var methods = {};
+angular.module("EditView").factory("EditViewService", function($http) {
+    var methods = {};
 
-  return methods;
+    return methods;
 
 });

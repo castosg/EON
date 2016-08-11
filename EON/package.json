@@ -8,7 +8,8 @@
     "body-parser"    : "^1.4.3",
     "express"        : "^4.13.4",
     "method-override": "^2.1.3",
-    "mongoose"       : "^4.4.12",
+    "couch-db"       : "^1.1.3",
     "morgan"         : "^1.1.1"
+    "require"        : "2.4.20"
   }
 }
