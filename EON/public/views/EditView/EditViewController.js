@@ -41,6 +41,18 @@ angular.module("EditView").controller("EditViewController", function(EditViewSer
         clearEditor();
     }
 
+    vm.getRequest = function(){
+      console.log("I'm in getRequest");
+      EditViewService.getRequest().then(
+        function(response){
+          console.log('success: ' + response);
+        },
+        function(error){
+          console.log('error: ' + error.data);
+        }
+      );
+    }
+
 
     function clearEditor() {
         vm.editor = {};
