@@ -1,6 +1,8 @@
 angular.module("EditView").controller("EditViewController", function(EditViewService) {
     var vm = this;
 
+    vm.dbReturn = [];
+
     vm.characters = [{
         name: 'Reaper',
         role: 'dps',
@@ -45,10 +47,13 @@ angular.module("EditView").controller("EditViewController", function(EditViewSer
       console.log("I'm in getRequest");
       EditViewService.getRequest().then(
         function(response){
-          console.log('success: ' + response);
+          console.log('success: ' + JSON.stringify(response));
+          //angular.forEach(response.data, function(item){
+          //  vm.dbReturn.push(item);
+          //console.log('returned: ' + vm.dbReturn);
         },
         function(error){
-          console.log('error: ' + error.data);
+          console.log('error: ' + JSON.stringify(error.data));
         }
       );
     }
