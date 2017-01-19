@@ -12,7 +12,7 @@ module.exports = router;
 router.get("/eonEdit", function(req, res) {
     console.log("We got to the get");
 
-    request.get('http://127.0.0.1:5984/eonstorage/_all_docs', include_docs=true, function(err, characters){
+    request.get('http://127.0.0.1:5984/eonstorage/_all_docs?include_docs=true', function(err, characters){
       if(err){
         return res.status(500).send(err);
       }

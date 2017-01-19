@@ -1,8 +1,10 @@
 angular.module("EditView").controller("EditViewController", function(EditViewService) {
     var vm = this;
+    vm.dbReturn = {};
+    vm.characters = {};
 
-    vm.dbReturn = [];
 
+/*
     vm.characters = [{
         name: 'Reaper',
         role: 'dps',
@@ -24,6 +26,7 @@ angular.module("EditView").controller("EditViewController", function(EditViewSer
         counters: 'damage',
         counterdBy: 'Racism'
     }];
+    */
     vm.editor = {};
     vm.sendAlert = function(stuff, stuffTwo) {
         alert(stuff + stuffTwo);
@@ -48,12 +51,16 @@ angular.module("EditView").controller("EditViewController", function(EditViewSer
       EditViewService.getRequest().then(
         function(response){
           console.log('success: ' + JSON.stringify(response));
-          //angular.forEach(response.data, function(item){
-          //  vm.dbReturn.push(item);
-          //console.log('returned: ' + vm.dbReturn);
+          var fixedResponse = JSON.stringify(response).replace(/\\'/g, "'");
+          vm.dbReturn = JSON.parse(fixedResponse);
+
+          angular.forEach(vm.dbReturn.data.body[1], function(value, key){
+            console.log('Stuff- ' + key +':' + value);
+          })
+          console.log('Response: ' + vm.dbReturn);
         },
         function(error){
-          console.log('error: ' + JSON.stringify(error.data));
+          console.log('error: ' + JSON.stringify(error));
         }
       );
     }
