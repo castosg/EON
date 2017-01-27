@@ -1,7 +1,15 @@
 angular.module("EditView").controller("EditViewController", function(EditViewService) {
     var vm = this;
     vm.dbReturn = {};
-    vm.characters = {};
+    vm.documents = [];
+    vm.characters = [];
+
+    vm.Character = function(doc){
+      this.name = doc.name;
+      this.role = doc.role;
+      this.counters = doc.counters;
+      this.countered_by = doc.countered_by;
+    }
 
 
 /*
@@ -46,18 +54,49 @@ angular.module("EditView").controller("EditViewController", function(EditViewSer
         clearEditor();
     }
 
+/*
+  This get request returns a database document.
+  The document is here.  response.data.body.rows[0-n].doc
+
+*/
     vm.getRequest = function(){
       console.log("I'm in getRequest");
       EditViewService.getRequest().then(
         function(response){
+          vm.dbReturn = JSON.parse(JSON.stringify(response));
+          vm.thingBody = eval("(" + vm.dbReturn.data.body + ")");
+          angular.forEach(vm.thingBody.rows, function(doc, key){
+            vm.documents.push(doc);
+            //console.log('Stuff- ' + key +':' + doc);
+            var character = new vm.Character(doc.doc);
+            vm.characters.push(character);
+            angular.forEach(character, function(item, key){
+              console.log('Stuff- ' + key +':' + item);
+            })
+          })
+
+
+
+
+          /*
           console.log('success: ' + JSON.stringify(response));
           var fixedResponse = JSON.stringify(response).replace(/\\'/g, "'");
           vm.dbReturn = JSON.parse(fixedResponse);
 
-          angular.forEach(vm.dbReturn.data.body[1], function(value, key){
+          angular.forEach(vm.dbReturn.data, function(value, key){
             console.log('Stuff- ' + key +':' + value);
           })
-          console.log('Response: ' + vm.dbReturn);
+          var validJSON = eval("(" + vm.dbReturn.data.body +  ")");
+          angular.forEach(validJSON.rows, function(value, key){
+            docu = value;
+            console.log("----------------------" + docu.doc.name.toUpperCase() + "----------------------");
+            angular.forEach(docu.doc, function(item, key){
+              console.log("Line : " + key +":"+ item);
+            })
+          })
+
+          */
+
         },
         function(error){
           console.log('error: ' + JSON.stringify(error));
