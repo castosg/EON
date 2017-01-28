@@ -54,12 +54,26 @@ angular.module("EditView").controller("EditViewController", function(EditViewSer
         clearEditor();
     }
 
+    //this method is for testing designDocs
+    vm.useDesignDoc = function(){
+      EditViewService.useDesignDoc().then(
+        function(response){
+          //on success
+          console.log(JSON.stringify(response));
+        },
+        function(error){
+          //on error
+          console.log('error: ' + JSON.stringify(error));
+        }
+      )
+    }
+
 /*
   This get request returns a database document.
   The document is here.  response.data.body.rows[0-n].doc
 
 */
-    vm.getRequest = function(){
+    vm.loadChars = function(){
       console.log("I'm in getRequest");
       EditViewService.getRequest().then(
         function(response){
@@ -70,32 +84,7 @@ angular.module("EditView").controller("EditViewController", function(EditViewSer
             //console.log('Stuff- ' + key +':' + doc);
             var character = new vm.Character(doc.doc);
             vm.characters.push(character);
-            angular.forEach(character, function(item, key){
-              console.log('Stuff- ' + key +':' + item);
-            })
           })
-
-
-
-
-          /*
-          console.log('success: ' + JSON.stringify(response));
-          var fixedResponse = JSON.stringify(response).replace(/\\'/g, "'");
-          vm.dbReturn = JSON.parse(fixedResponse);
-
-          angular.forEach(vm.dbReturn.data, function(value, key){
-            console.log('Stuff- ' + key +':' + value);
-          })
-          var validJSON = eval("(" + vm.dbReturn.data.body +  ")");
-          angular.forEach(validJSON.rows, function(value, key){
-            docu = value;
-            console.log("----------------------" + docu.doc.name.toUpperCase() + "----------------------");
-            angular.forEach(docu.doc, function(item, key){
-              console.log("Line : " + key +":"+ item);
-            })
-          })
-
-          */
 
         },
         function(error){
@@ -126,6 +115,9 @@ angular.module("EditView").controller("EditViewController", function(EditViewSer
     }
 
 
+    init = function (){
+      vm.loadChars();
+    }
 
-
+    init();
 });

@@ -20,6 +20,19 @@ router.get("/eonEdit", function(req, res) {
         return res.status(200).send(characters);
       }
     })
+  })
+
+router.get("/eonTest", function(req, res) {
+  console.log("We are in /eonTest");
+
+  request.get('http://127.0.0.1:5984/eonstorage/_design/characters/_view/all', function(err, character_docs){
+    if(err){
+      return res.status(500).send(err);
+    }
+    else{
+      return res.status(200).send(character_docs);
+    }
+  })
 
 
 //    request.get({url : url + db + '_all_docs'}).then(function(req, res){
