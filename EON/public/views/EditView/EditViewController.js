@@ -1,4 +1,4 @@
-angular.module("EditView").controller("EditViewController", function(EditViewService) {
+angular.module("EditView").controller("EditViewController", function(EditViewService, processRequestData) {
     var vm = this;
     vm.dbReturn = {};
     vm.documents = [];
@@ -59,7 +59,16 @@ angular.module("EditView").controller("EditViewController", function(EditViewSer
       EditViewService.useDesignDoc().then(
         function(response){
           //on success
-          console.log(JSON.stringify(response));
+          //console.log(JSON.stringify(response));
+          var stuff = processRequestData.getCharacterDocs(response);
+          //console.log(JSON.stringify(stuff));
+          angular.forEach(stuff, function(charact, key){
+            vm.characters.push(charact.value);
+            angular.forEach(charact.value, function(attribute, key){
+              //console.log(" stuff: " + key + ":" + attribute);
+
+            })
+          })
         },
         function(error){
           //on error
@@ -116,7 +125,7 @@ angular.module("EditView").controller("EditViewController", function(EditViewSer
 
 
     init = function (){
-      vm.loadChars();
+      vm.useDesignDoc();
     }
 
     init();
