@@ -5,6 +5,7 @@ angular.module("EditView").controller("EditViewController", function(EditViewSer
     vm.characters = [];
 
     vm.Character = function(doc){
+      this.id = doc.id;
       this.name = doc.name;
       this.role = doc.role;
       this.counters = doc.counters;
@@ -50,7 +51,7 @@ angular.module("EditView").controller("EditViewController", function(EditViewSer
     }
 
     vm.addChar = function() {
-        vm.characters.push(charFactory(vm.editor.name, vm.editor.role, vm.editor.counters, vm.editor.counteredBy));
+        vm.characters.push(charFactory(vm.editor.name, vm.editor.role, vm.editor.counters, vm.editor.countered_by));
         clearEditor();
     }
 
@@ -79,27 +80,35 @@ angular.module("EditView").controller("EditViewController", function(EditViewSer
 
 /*
   This get request returns a database document.
-  The document is here.  response.data.body.rows[0-n].doc
+  The document is here:  response.data.body.rows[0-n].doc
 
 */
     vm.loadChars = function(){
       console.log("I'm in getRequest");
-      EditViewService.getRequest().then(
+      EditViewService.useDesignDoc().then(
         function(response){
-          vm.dbReturn = JSON.parse(JSON.stringify(response));
-          vm.thingBody = eval("(" + vm.dbReturn.data.body + ")");
-          angular.forEach(vm.thingBody.rows, function(doc, key){
-            vm.documents.push(doc);
-            //console.log('Stuff- ' + key +':' + doc);
-            var character = new vm.Character(doc.doc);
-            vm.characters.push(character);
+          //on success
+          var tempCharArray = [];
+          angular.forEach(processRequestData.getCharacterDocs(response), function(charact, key){
+            tempCharArray.push(charact.value);
           })
 
+          console.log(JSON.stringify(tempCharArray));
+          tempCharArray = processRequestData.updateCharArray(vm.characters, tempCharArray);
+          console.log(JSON.stringify(tempCharArray));
+          
+          angular.forEach(tempCharArray, function(attribute, key){
+            vm.characters.push(new vm.Character(attribute));
+          })
+          //Takes all objects
+          //vm.characters = processRequestData.updateCharArray(vm.characters, tempCharArray);
+          //console.log(JSON.stringify(vm.characters));
         },
         function(error){
+          //on error
           console.log('error: ' + JSON.stringify(error));
         }
-      );
+      )
     }
 
 
@@ -111,7 +120,7 @@ angular.module("EditView").controller("EditViewController", function(EditViewSer
         vm.editor.name = target.name;
         vm.editor.role = target.role;
         vm.editor.counters = target.counters;
-        vm.editor.counteredBy = target.counteredBy;
+        vm.editor.countered_by = target.countered_by;
     }
 
     function charFactory(charName, charRole, charCounters, charCounteredBy) {
@@ -125,7 +134,7 @@ angular.module("EditView").controller("EditViewController", function(EditViewSer
 
 
     init = function (){
-      vm.useDesignDoc();
+      vm.loadChars();
     }
 
     init();
