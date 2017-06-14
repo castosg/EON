@@ -18,27 +18,31 @@ angular.module("app.utilities").factory("processRequestData", function(){
 
     return processedData;
   };
-//tempCharArray = tempCharArray.filter(function(value){return vm.characters.indexOf(val) == -1;});
+/*
+This updates the character array with the difference between the current version of the character array and the one pulled from the database.
+Fix-It should pass in existing arrays, not JSON strings that need parsed
+*/
   utils.updateCharArray = function(oldArray, newArray){
     //holds the updated version of the character array
+//    console.log("Original Array: " + JSON.stringify(oldArray));
+//    console.log("New Array: " + JSON.stringify(newArray));
     var isEqual = false;
     var charArray = [];
-    angular.forEach(newArray, function(newKey, newValue){
-      angular.forEach(oldArray, function(oldKey, oldValue){
-        isEqual = false;
-        if(oldValue.name == newValue.name){
-          isEqual = true;
-        }
-        if(!isEqual){
-          charArray.push(newValue);
-        }
-      })
-    })
+
+    angular.forEach(newArray, function(value, key){
+      if (oldArray.indexOf(value) == -1){
+        charArray.push(value);
+      }
+    });
+
+//    console.log("Final Array: " + JSON.stringify(charArray));
     return charArray;
   };
 
 
 
-
+/*
+This is the bottom of the service
+*/
   return utils;
 });

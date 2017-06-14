@@ -37,10 +37,6 @@ angular.module("EditView").controller("EditViewController", function(EditViewSer
     }];
     */
     vm.editor = {};
-    vm.sendAlert = function(stuff, stuffTwo) {
-        alert(stuff + stuffTwo);
-
-    }
     vm.editChar = function(index) {
         giveToEditor(vm.characters[index]);
         vm.characters.splice(index, 1);
@@ -51,7 +47,15 @@ angular.module("EditView").controller("EditViewController", function(EditViewSer
     }
 
     vm.addChar = function() {
-        vm.characters.push(charFactory(vm.editor.name, vm.editor.role, vm.editor.counters, vm.editor.countered_by));
+        var doc = charFactory(vm.editor.name, vm.editor.role, vm.editor.counters, vm.editor.countered_by);
+        EditViewService.addChar(doc).then(
+          function(response){
+            console.log("We didn't error");
+          },
+          function(err){
+            console.log("we errored");
+          }
+        )
         clearEditor();
     }
 
@@ -84,8 +88,7 @@ angular.module("EditView").controller("EditViewController", function(EditViewSer
 
 */
     vm.loadChars = function(){
-      console.log("I'm in getRequest");
-      EditViewService.useDesignDoc().then(
+      EditViewService.updateCharArray().then(
         function(response){
           //on success
           var tempCharArray = [];
@@ -93,10 +96,11 @@ angular.module("EditView").controller("EditViewController", function(EditViewSer
             tempCharArray.push(charact.value);
           })
 
-          console.log(JSON.stringify(tempCharArray));
+          //console.log(JSON.stringify(tempCharArray));
           tempCharArray = processRequestData.updateCharArray(vm.characters, tempCharArray);
-          console.log(JSON.stringify(tempCharArray));
-          
+          //console.log(JSON.stringify(tempCharArray));
+
+          vm.characters = [];
           angular.forEach(tempCharArray, function(attribute, key){
             vm.characters.push(new vm.Character(attribute));
           })
