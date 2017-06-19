@@ -10,7 +10,7 @@ angular.module("EditView").factory("EditViewService", function($http) {
     }
 
     methods.addChar = function(doc){
-      return $http.put("/eonAdd", doc);
+      return $http.post("/eonAdd", doc);
     }
 
     return methods;

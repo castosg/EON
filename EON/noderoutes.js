@@ -71,16 +71,17 @@ router.get("/eonUpdate", function(req, res) {
 
 })
 
-router.put("/eonAdd", function(req, res) {
+
+router.post("/eonAdd", function(req, res) {
   console.log("we're in eon add");
   req.body.doc_type = 'character';
   var doc_object = {
-    url : 'http://127.0.0.1:5984/eonstorage/uniqueID',
+    url : 'http://127.0.0.1:5984/eonstorage/',
     body: req.body,
     json : true,
   }
 
-  request.put(doc_object, function(err, character_docs){
+  request.post(doc_object, function(err, character_docs){
     if(err){
       return res.status(500).send(err);
     }

@@ -42,6 +42,8 @@ angular.module("EditView").controller("EditViewController", function(EditViewSer
         vm.characters.splice(index, 1);
     }
 
+    //Needs to delete from the db instead of just the front end character list
+    //need Rev id
     vm.deleteChar = function(index){
       vm.characters.splice(index, 1);
     }
@@ -132,7 +134,7 @@ angular.module("EditView").controller("EditViewController", function(EditViewSer
             name: charName,
             role: charRole,
             counters: charCounters,
-            counteredBy: charCounteredBy
+            countered_by: charCounteredBy
         };
     }
 
